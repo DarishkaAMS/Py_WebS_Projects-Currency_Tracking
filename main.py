@@ -13,4 +13,4 @@ soup = BeautifulSoup(full_page.content, 'html.parser')
 # print(soup)
 
 convert = soup.findAll('span', {'class': 'DFlfde', 'class': 'SwHCTb', 'data-precision': 2})
-print(convert)
+print(convert[0].text)
