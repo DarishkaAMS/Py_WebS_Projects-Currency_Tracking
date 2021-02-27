@@ -22,8 +22,10 @@ class Currency:
         currency = float(self.get_currency_price().replace(",", "."))
         if currency >= self.current_converted_price + self.difference:
             print("The exchange range has grown a lot! Go and do something")
+            self.send_mail()
         elif currency <= self.current_converted_price - self.difference:
             print("The exchange range has dropped a lot! Go and do something")
+            self.send_mail()
         print("At the moment 1 USD = ", str(currency))
         time.sleep(3)
         self.check_currency()
