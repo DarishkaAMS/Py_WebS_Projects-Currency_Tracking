@@ -13,7 +13,7 @@ class Currency:
         self.current_converted_price = float(self.get_currency_price())
 
     def get_currency_price(self):
-        full_page = requests.get(USD_UAH, headers=headers)
+        full_page = requests.get(self.USD_UAH, headers=self.headers)
         soup = BeautifulSoup(full_page.content, 'html.parser')
         convert = soup.findAll('span', {'class': 'DFlfde', 'class': 'SwHCTb', 'data-precision': 2})
         return convert[0].text
@@ -26,5 +26,7 @@ class Currency:
             print("The exchange range has dropped a lot! Go and do something")
         print("At the moment 1 USD = ", currency)
         time.sleep(3)
-        check_currency()
+        self.check_currency()
 
+currency = Currency()
+currency.check_currency()
