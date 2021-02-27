@@ -8,17 +8,17 @@ headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36'}
 
 
-def check_currency():
-    full_page = requests.get(USD_UAH, headers=headers)
-    # print(full_page.content)
+class Currency:
 
-    soup = BeautifulSoup(full_page.content, 'html.parser')
-    # print(soup)
+    def check_currency():
+        full_page = requests.get(USD_UAH, headers=headers)
+        # print(full_page.content)
 
-    convert = soup.findAll('span', {'class': 'DFlfde', 'class': 'SwHCTb', 'data-precision': 2})
-    print("At the moment 1 USD = ", convert[0].text)
-    time.sleep(3)
-    check_currency()
+        soup = BeautifulSoup(full_page.content, 'html.parser')
+        # print(soup)
 
+        convert = soup.findAll('span', {'class': 'DFlfde', 'class': 'SwHCTb', 'data-precision': 2})
+        print("At the moment 1 USD = ", convert[0].text)
+        time.sleep(3)
+        check_currency()
 
-check_currency()
