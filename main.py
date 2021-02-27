@@ -10,7 +10,7 @@ class Currency:
     difference = 0.1
 
     def __init__(self):
-        self.current_converted_price = float(self.get_currency_price())
+        self.current_converted_price = float(self.get_currency_price().replace(",", "."))
 
     def get_currency_price(self):
         full_page = requests.get(self.USD_UAH, headers=self.headers)
@@ -19,14 +19,15 @@ class Currency:
         return convert[0].text
 
     def check_currency(self):
-        currency = float(self.get_currency_price())
+        currency = float(self.get_currency_price().replace(",", "."))
         if currency >= self.current_converted_price + self.difference:
             print("The exchange range has grown a lot! Go and do something")
         elif currency <= self.current_converted_price - self.difference:
             print("The exchange range has dropped a lot! Go and do something")
-        print("At the moment 1 USD = ", currency)
+        print("At the moment 1 USD = ", str(currency))
         time.sleep(3)
         self.check_currency()
+
 
 currency = Currency()
 currency.check_currency()
