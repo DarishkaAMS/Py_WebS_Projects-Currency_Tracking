@@ -12,5 +12,5 @@ full_page = requests.get(USD_UAH, headers=headers)
 soup = BeautifulSoup(full_page.content, 'html.parser')
 # print(soup)
 
-convert = soup.findAll('span', {'class': 'DFlfde SwHCTb'})
+convert = soup.findAll('span', {'class': 'DFlfde', 'class': 'SwHCTb', 'data-precision': 2})
 print(convert)
