@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import time
-
+import smtplib
 
 class Currency:
     USD_UAH = 'https://www.google.com/search?q=%D0%BA%D1%83%D1%80%D1%81+%D0%B4%D0%BE%D0%BB%D0%B0%D1%80%D0%B0+%D0%B4%D0%BE+%D0%B3%D1%80%D0%B8%D0%B2%D0%BD%D1%96&oq=%D0%BA%D1%83%D1%80&aqs=chrome.0.69i59j69i57j35i39j69i59j0j69i61l3.1353j0j7&sourceid=chrome&ie=UTF-8'
@@ -27,6 +27,26 @@ class Currency:
         print("At the moment 1 USD = ", str(currency))
         time.sleep(3)
         self.check_currency()
+
+    def send_mail(self):
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.ehlo()
+        server.starttls()
+        server.ehlo()
+
+        server.login('Dummy@gmail.com', 'La-La-La')
+
+        subject = "Currency exchange rate"
+        body = "Currency exchange rate for USD has changed"
+        message = f'Subject: {subject}\n\n{body}'
+
+        server.sendmail(
+            'Dummy@gmail.com',
+            'Lummy@gmail.com',
+            message
+        )
+
+        server.quit()
 
 
 currency = Currency()
